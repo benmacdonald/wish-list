@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013190124) do
+ActiveRecord::Schema.define(version: 20171013230809) do
 
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
@@ -22,13 +22,14 @@ ActiveRecord::Schema.define(version: 20171013190124) do
 
   create_table "wishlist_items", force: :cascade do |t|
     t.text "email"
-    t.bigint "productid"
-    t.bigint "shopid"
+    t.integer "productid", limit: 8
     t.decimal "price"
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "domain_name"
+    t.string "name"
   end
 
 end
