@@ -6,11 +6,7 @@
 #
 default: &default
   adapter: postgresql
-  database: decode2017
-  username: postgres
-  password: postgres
-  host: localhost
-  port: 5432
+  url: ENV['DATABASE_URL']
 
 development:
   adapter: sqlite3
