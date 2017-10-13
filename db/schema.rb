@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013230809) do
+ActiveRecord::Schema.define(version: 20171013231155) do
 
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20171013230809) do
     t.datetime "updated_at", null: false
     t.string "domain_name"
     t.string "name"
+    t.integer "quantity"
   end
 
 end

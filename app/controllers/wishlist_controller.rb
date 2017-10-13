@@ -4,14 +4,14 @@ class WishlistController < ApplicationController
   	subscription = WishlistItem.create(subscription_params)
   	if !subscription.valid?
   		# Update wish list item price and email if it already exists
-  		item = WishlistItem.where(email: params[:email], productid: params[:productid], shopid: params[:shopid])
+  		item = WishlistItem.where(email: params[:email], productid: params[:productid], domain_name: params[:domain_name])
   		item.update(subscription_params)
-  	end
+  	end 	
   	head :ok
   end
 
   def get_store_subscribers
-  	subscriptions = WishlistItem.where(shopid: params[:shopid])
+  	subscriptions = WishlistItem.where(domain_name: params[:domain_name])
   	render json: subscriptions
   end
 
@@ -21,7 +21,7 @@ class WishlistController < ApplicationController
   end
 
   def subscription_params
-  	params.permit(:email, :productid, :shopid, :price, :end)
+  	params.permit(:email, :domain_name, :name, :quantity, :price, :end, :quantity)
   end
 
   def notify_consumers
