@@ -2,16 +2,16 @@
 
 one:
   email: MyText
-  productid: 
-  shopid: 
+  productid: 1
+  name: decode17
   price: 9.99
   start: 2017-10-13 15:01:24
   end: 2017-10-13 15:01:24
 
 two:
   email: MyText
-  productid: 
-  shopid: 
+  productid:
+  name:
   price: 9.99
   start: 2017-10-13 15:01:24
   end: 2017-10-13 15:01:24
