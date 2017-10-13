@@ -8,7 +8,7 @@ default: &default
   adapter: postgresql
   database: db4f4ta83omie2
   username: ernjomslhvtfnq
-  password: ernjomslhvtfnq:a292811489a33be360fd082756f4681627cfd9e6814041f755c38aca0578efcc
+  password: a292811489a33be360fd082756f4681627cfd9e6814041f755c38aca0578efcc
   host: ec2-54-221-241-23.compute-1.amazonaws.com:
   port: 5432
 
