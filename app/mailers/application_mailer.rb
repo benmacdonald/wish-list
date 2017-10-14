@@ -3,6 +3,8 @@ class ApplicationMailer < ActionMailer::Base
   #layout 'mailer'
 
   def notify_consumers(users)
+    print "emailing: "
+    print users
     wishlists.each do |user|
       @user = user
       mail(to: user.email, subject: "The Item you wanted is now on sale!")
