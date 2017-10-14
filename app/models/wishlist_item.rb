@@ -4,6 +4,25 @@ class WishlistItem < ApplicationRecord
 
 	after_commit :maybe_notify_merchant
 
+	class << self
+		def getUniqueProductsByStore(domainName)
+			items = WishlistItem.where(domain_name: domainName).map(&:productid).uniq
+			results = {}
+			items.each do |item|
+				count = WishlistItem.where(productid: item).count
+				averageWishPrices = WishlistItem.where(productid:item).average(:price)
+				results= results.merge({
+					item: {
+						'count' => count,
+						'averageWishPrice' => averageWishPrices
+					}
+				})
+			end
+			puts results
+			results.to_json
+		end
+	end
+
 	private
 	def maybe_notify_merchant
 		# Notify merchant if at least X people have requested the price to be changed
