@@ -26,10 +26,8 @@ class WishlistController < ApplicationController
   end
 
   def notify_consumers
-    puts params['variants']['price']
+    puts(params['variants']['price'])
     wishlists = WishlistItem.where(productid: params[:id]).where("price > ?", params['variants']['price'])
-    print("all wishlists")
-    puts WishlistItem.all
     ApplicationMailer.notify_consumers(wishlists).deliver_now
     redirect_to '/' and return
   end
