@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
   default from: 'decode2017shopify@gmail.com'
-  layout 'mailer'
+  #layout 'mailer'
 
   def notify_consumers(users)
     wishlists.each do |user|
