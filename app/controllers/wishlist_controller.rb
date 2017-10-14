@@ -21,9 +21,9 @@ class WishlistController < ApplicationController
   	render json: subscriptions
   end
 
-  def subscription_params
-  	params.permit(:email, :domain_name, :name, :quantity, :price, :end, :quantity, :productid, :variants)
-  end
+  # def subscription_params
+  # 	#params.permit(:email, :domain_name, :name, :quantity, :price, :end, :quantity, :productid, :variants)
+  # end
 
   def notify_consumers
     wishlists = WishlistItem.where(productid: params[:id]).where("price > ?", params['variants']['price'])
