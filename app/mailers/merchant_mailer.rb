@@ -8,6 +8,6 @@ class MerchantMailer < ApplicationMailer
 		@average_price = average_price
 		attachments.inline["logo.png"] = File.read("#{Rails.root}/app/assets/images/logo.png")
 		# Replace to: with shop owner email
-		mail(to: ENV['YOUR_EMAIL'], subject: 'Customers requesting price change on ' << product.title)
+		mail(to: shop.email, subject: 'Customers requesting price change on ' << product.title)
 	end
 end
