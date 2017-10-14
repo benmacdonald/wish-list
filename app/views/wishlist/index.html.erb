@@ -3,6 +3,12 @@
   // Skipin the JQuery, like a boss.
 
   function get_products(){
+
+    tab = document.getElementById('products')
+    while(tab.rows.length > 1) {
+      tab.deleteRow(1);
+    }
+
     var xhr = new XMLHttpRequest()
     xhr.open('POST', window.location.href, true)
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
@@ -31,7 +37,7 @@
 
 </script>
 
-<h2>Enter your email to view your wishlisted items.</h2>
+<h2>Enter an email to filter wishlisted items.</h2>
 
 <input type="text" id="email">
 <button type="button" id="submit" onclick="get_products()">Submit</button>
@@ -45,5 +51,14 @@
     <th><b>Quantity</b></th>
     <th><b>Price</b></th>
   <tr>
-  <tbody></tbody>
+  <tbody style='text-align: left;'>
+    <% @wishlist_items.each do |item| %>
+      <tr class='wish-row'>
+        <td><%= item.name %></td>
+        <td><%= item.email %></td>
+        <td><%= item.quantity %></td>
+        <td><%= sprintf('%.2f', item.price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

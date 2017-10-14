@@ -34,6 +34,7 @@ class WishlistController < ApplicationController
 
   # GET /wishlist
   def index
+    @wishlist_items = WishlistItem.where(domain_name: params[:shop])
   end
 
   # Finds ShopifyAPI::Product objects from a users WishlistItem's.
