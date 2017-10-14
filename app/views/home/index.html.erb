@@ -31,7 +31,7 @@
 
 <% @products.each do |prod| %>
   <div class="floating-box">
-  	<a href="<%= @shop.domain %>/admin/products/<%= prod.id %>?locale=en"><img src=<%= prod.images[0].src %> alt="Product Image" style="width:150px;height:150px;"></a>
+  	<a href="http://<%= @shop.domain %>/admin/products/<%= prod.id %>?locale=en"><img src=<%= prod.images[0].src %> alt="Product Image" style="width:150px;height:150px;"></a>
   </div>
 
   <div class="floating-box">
