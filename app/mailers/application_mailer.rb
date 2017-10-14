@@ -4,7 +4,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def notify_consumers(users)
     puts("emailing: ")
-    wishlists.each do |user|
+    users.each do |user|
       puts(user.email)
       @user = user
       mail(to: user.email, subject: "The Item you wanted is now on sale!")
