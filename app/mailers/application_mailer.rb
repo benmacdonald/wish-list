@@ -3,6 +3,7 @@ class ApplicationMailer < ActionMailer::Base
   #layout 'mailer'
 
   def notify_consumers(users)
+    attachments.inline["logo.png"] = File.read("#{Rails.root}/app/assets/images/logo.png")
     users.each do |user|
       @user = user
       mail(to: user.email, subject: "The Item you wanted is now on sale!")
