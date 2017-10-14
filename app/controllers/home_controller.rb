@@ -1,6 +1,5 @@
-class HomeController < ShopifyApp::AuthenticatedController
+class HomeController < ApplicationController
   def index
-    @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @wishlist = WishlistItem.getUniqueProductsByStore(params[:shop])
     response.headers['X-Frame-Options'] = "ALLOW-FROM " << params[:shop]
     puts @wishlist
