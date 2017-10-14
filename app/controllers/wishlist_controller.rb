@@ -30,4 +30,19 @@ class WishlistController < ApplicationController
     ApplicationMailer.notify_consumers(wishlists)
   end
 
+  # GET /wishlist
+  def index
+  end
+
+  # Finds ShopifyAPI::Product objects from a users WishlistItem's.
+  def get_wishlisted_products
+    wishlist_items = WishlistItem.where(email: params[:email])
+    product_ids = wishlist_items.map{ |item| item.productid }
+    shop_info = Shop.where(shopify_domain: params[:shop]).first
+    session = ShopifyAPI::Session.new(shop_info.shopify_domain, shop_info.shopify_token)
+    ShopifyAPI::Base.activate_session(session)
+    products = product_ids.map{ |id| ShopifyAPI::Product.find(id) }
+    render json: products
+  end
+
 end

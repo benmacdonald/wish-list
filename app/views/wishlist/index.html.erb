@@ -1,0 +1,48 @@
+<script>
+
+  // Skipin the JQuery, like a boss.
+
+  function get_products(){
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', window.location.href, true)
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+    xhr.onload = function(){
+        update_wishlist(JSON.parse(this.response))
+    }
+    xhr.send('email=' + document.getElementById('email').value)
+  }
+
+  function update_wishlist(products){
+    var table_fields = ['name', 'quantity', 'price']
+    var table_ref = document.getElementById('products').getElementsByTagName('tbody')[0]
+    for(i = 0; i < products.length; i++){
+      var row = table_ref.insertRow(table_ref.rows.length)
+      for (j = 0; j < table_fields.length; j++){
+        var cell = row.insertCell(j)
+        if(table_fields[j] == 'price'){
+          var text = document.createTextNode(parseFloat(products[i][table_fields[j]]).toFixed(2))
+        } else {
+          var text = document.createTextNode(products[i][table_fields[j]])
+        }
+        cell.appendChild(text)
+      }
+    }
+  }
+
+</script>
+
+<h2>Enter your email to view your wishlisted items.</h2>
+
+<input type="text" id="email">
+<button type="button" id="submit" onclick="get_products()">Submit</button>
+
+<hr>
+
+<table id='products' style="width:100%">
+  <tr style='text-align:left;'>
+    <th><b>Name</b></th>
+    <th><b>Quantity</b></th>
+    <th><b>Price</b></th>
+  <tr>
+  <tbody></tbody>
+</table>
