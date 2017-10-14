@@ -6,6 +6,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+WishlistItem.create(email: 'test@email.com',
+                    productid: 12877982859,
+                    domain_name: 'decode17.myshopify.com',
+                    price: 5.60,
+                    start: Time.zone.now,
+                    end: Time.zone.now,
+                    name: 'test',
+                    quantity: 2)
+
+WishlistItem.create(email: 'test@email.com',
+                    productid: 12877982859,
+                    domain_name: 'decode17.myshopify.com',
+                    price: 2.90,
+                    start: Time.zone.now,
+                    end: Time.zone.now,
+                    name: 'test two',
+                    quantity: 7)
+
+=begin
 3.times do |j|
   Shop.create({
       shopify_domain: "decode17_#{j}.myshopify.com",
@@ -26,5 +45,4 @@ end
           quantity: i,
       })
 end
-
-
+=end
