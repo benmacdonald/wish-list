@@ -11,15 +11,12 @@ class WishlistItem < ApplicationRecord
 			items.each do |item|
 				count = WishlistItem.where(productid: item).count
 				averageWishPrices = WishlistItem.where(productid:item).average(:price)
-				results= results.merge({
-					item: {
-						'count' => count,
-						'averageWishPrice' => averageWishPrices
-					}
-				})
+				results[item] = {
+					'count': count,
+					'averageWishPrices': averageWishPrices
+				}
 			end
-			puts results
-			results.to_json
+			results
 		end
 	end
 
