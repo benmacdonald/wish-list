@@ -26,10 +26,9 @@ class WishlistController < ApplicationController
   end
 
   def notify_consumers
-    puts(params['variants']['price'])
     wishlists = WishlistItem.where(productid: params[:id]).where("price > ?", params['variants']['price'])
     ApplicationMailer.notify_consumers(wishlists).deliver_now
-    redirect_to '/' and return
+    render json: wishlists
   end
 
   # GET /wishlist
