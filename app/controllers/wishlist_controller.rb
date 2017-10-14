@@ -28,7 +28,7 @@ class WishlistController < ApplicationController
   def notify_consumers
     wishlists = WishlistItem.where(productid: params[:id])
     .where("price >= #{params[:price]} AND end > #{Time.zone.now}")
-    print wishlists
+    print WishlistItem.all
     ApplicationMailer.notify_consumers(wishlists)
     redirect_to '/' and return
   end
