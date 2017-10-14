@@ -13,7 +13,7 @@
   }
 
   function update_wishlist(products){
-    var table_fields = ['name', 'quantity', 'price']
+    var table_fields = ['name', 'email', 'quantity', 'price']
     var table_ref = document.getElementById('products').getElementsByTagName('tbody')[0]
     for(i = 0; i < products.length; i++){
       var row = table_ref.insertRow(table_ref.rows.length)
@@ -41,6 +41,7 @@
 <table id='products' style="width:100%">
   <tr style='text-align:left;'>
     <th><b>Name</b></th>
+    <th><b>Email</b></th>
     <th><b>Quantity</b></th>
     <th><b>Price</b></th>
   <tr>
