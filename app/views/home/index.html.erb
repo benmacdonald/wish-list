@@ -39,6 +39,7 @@
   </div>
 
   <div class="floating-box">
+      <p>Current price: <%= prod.variants[0].price %></p>
   		<% if @wishlist[prod.id] %>
         <p>Averge wish price: <%= sprintf('%.2f', @wishlist[prod.id][:averageWishPrices]) %></p>
         <p>Number of wishes: <%= @wishlist[prod.id][:count]%></p>
