@@ -1,12 +1,7 @@
-class HomeController < ApplicationController
+class HomeController < ShopifyApp::AuthenticatedController
   def index
-    @wishlist = WishlistItem.getUniqueProductsByStore(params[:shop])
-    #shop_info = Shop.where(shopify_domain: params[:shop]).first
-    #session = ShopifyAPI::Session.new(shop_info.shopify_domain, shop_info.shopify_token)
-    ShopifyAPI::Base.activate_session(session)
-    @products = ShopifyAPI::Product.all
-    puts @products
-    response.headers['X-Frame-Options'] = "ALLOW-FROM " << params[:shop]
-    puts @wishlist
+   	@products = ShopifyAPI::Product.find(:all)
+  	@webhooks = ShopifyAPI::Webhook.find(:all)
+  	response.headers['X-Frame-Options'] = "ALLOW-FROM " << ShopifyAPI::Shop.current.domain
   end
 end
