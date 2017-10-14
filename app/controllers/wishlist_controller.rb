@@ -6,7 +6,7 @@ class WishlistController < ApplicationController
   		# Update wish list item price and email if it already exists
   		item = WishlistItem.where(email: params[:email], productid: params[:productid], domain_name: params[:domain_name])
   		item.update(subscription_params)
-  	end 	
+  	end
   	head :ok
   end
 
@@ -25,11 +25,8 @@ class WishlistController < ApplicationController
   end
 
   def notify_consumers
-    print(params)
-    wishlists = WishlistItem.where(
-      email: params[:email],
-      productid: params[:id]).where("price >= #{params[:price]} AND end < #{Time.zone.now}")
-
+    wishlists = WishlistItem.where(name: params[:vendor], productid: params[:id])
+    .where("price >= #{params[:price]} AND end < #{Time.zone.now}")
     ApplicationMailer.notify_consumers(wishlists)
   end
 
