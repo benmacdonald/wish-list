@@ -26,6 +26,7 @@ if (!document.getElementById('buttonDiv')) {
   "<label for='quantity'>Quantity</label>" +
   "<input id='quantity' name='quantity' type='number'></input>" +
   "<p id='quantityValidation'></p>" +
+  "<label for='end'>End date (date when notifications end)</label>" +
   "<input id='end' name='end' type='date'></input>" +
   "</br>" +
   "</br>" +
