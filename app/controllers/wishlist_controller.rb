@@ -26,13 +26,7 @@ class WishlistController < ApplicationController
 
   def notify_consumers
     wishlists = WishlistItem.where(productid: params[:id])
-    #.where("price >= #{params[:price]} AND end < #{Time.zone.now}")
-    print("found: ")
-    print(wishlists)
-    print("passed id: ")
-    print(params[:id])
-    print("all: ")
-    print(WishlistItem.all)
+    .where("price >= #{params[:price]} AND end < #{Time.zone.now}")
 
 
     ApplicationMailer.notify_consumers(wishlists)

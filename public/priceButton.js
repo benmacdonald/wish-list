@@ -63,7 +63,7 @@ if (!document.getElementById('buttonDiv')) {
     var price = document.getElementById('price').value
     var quantity = document.getElementById('quantity').value
     var merchantEmail = document.getElementById('in-context-paypal-metadata').value
-    var productId = document.getElementById('ProductSelect-product').options[0].value || ""
+    var productId = JSON.parse(document.getElementById('ProductJson-product').innerHTML).id  || ""
     var url = window.location.host
     var name = document.querySelector('meta[property="og:title"]').content;
 
