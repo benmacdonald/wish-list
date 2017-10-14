@@ -4,9 +4,9 @@ one:
   email: abc@efg.com
   productid: 12877870411
   name: decode17
-  price: 9.99
+  price: 1
   start: 2017-10-13 15:01:24
-  end: 2017-10-13 15:01:24
+  end: <% Time.zone.tomorrow %> 
 
 two:
   email: MyText
