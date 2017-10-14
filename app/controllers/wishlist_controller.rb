@@ -12,6 +12,7 @@ class WishlistController < ApplicationController
 
   def get_store_subscribers
   	subscriptions = WishlistItem.where(domain_name: params[:domain_name])
+    response.headers['X-Frame-Options'] = "ALLOW-FROM " << params[:domain_name]
   	render json: subscriptions
   end
 
@@ -35,6 +36,7 @@ class WishlistController < ApplicationController
   # GET /wishlist
   def index
     @wishlist_items = WishlistItem.where(domain_name: params[:shop])
+    response.headers['X-Frame-Options'] = "ALLOW-FROM " << params[:shop]
   end
 
   # Finds ShopifyAPI::Product objects from a users WishlistItem's.
@@ -45,6 +47,7 @@ class WishlistController < ApplicationController
     session = ShopifyAPI::Session.new(shop_info.shopify_domain, shop_info.shopify_token)
     ShopifyAPI::Base.activate_session(session)
     products = product_ids.map{ |id| ShopifyAPI::Product.find(id) }
+    response.headers['X-Frame-Options'] = "ALLOW-FROM " << shop_info.shopify_domain
     render json: products
   end
 
