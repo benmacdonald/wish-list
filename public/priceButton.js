@@ -12,23 +12,45 @@ if (!document.getElementById('buttonDiv')) {
   var modal = document.createElement('div');
   modal.style.display = 'none';
   modal.setAttribute('id', 'modal');
-  var innerModal = "<div id='modalBody'><span><a id='closeModal'>x</a></span><div id='formContainer'></div></div>";
+  var innerModal = "<div id='modalBody'><span><a id='closeModal'>x</a></span><div id='formContainer'></div><div id='success'>Successfully requested price</div></div>";
   modal.innerHTML = innerModal;
   document.body.insertBefore(modal, document.body.firstChild);
 
   var form = "<form>" +
   "<label for='email'>Email Address</label>" +
   "<input id='email' name='email' type='email'></input>" +
+  "<p id='emailValidation'></p>" +
   "<label for='price'>Desired Price</label>" +
   "<input id='price' name='price' type='number'></input>" +
+  "<p id='priceValidation'></p>" +
   "<label for='quantity'>Quantity</label>" +
   "<input id='quantity' name='quantity' type='number'></input>" +
+  "<p id='quantityValidation'></p>" +
+  "<input id='end' name='end' type='date'></input>" +
+  "</br>" +
+  "</br>" +
   "<button id='priceAjustSubmit'>Submit</button>" +
   "</form>"
 
   document.getElementById('formContainer').innerHTML = form
 
   // Setting the CSS
+
+  document.getElementById('emailValidation').setAttribute('style',
+  "color:red;"
+  )
+  document.getElementById('priceValidation').setAttribute('style',
+  "color:red;"
+  )
+  document.getElementById('quantityValidation').setAttribute('style',
+  "color:red;"
+  )
+  document.getElementById('quantityValidation').setAttribute('style',
+  "color:red;"
+  )
+  document.getElementById('priceValidation').setAttribute('style',
+  "color:red;"
+  )
 
   productForm.setAttribute('style',
   "margin-bottom: 18px;"
@@ -60,6 +82,14 @@ if (!document.getElementById('buttonDiv')) {
 
   document.getElementById('requestPrice').addEventListener("click", function () {
     document.getElementById('modal').style.display = 'block'
+    document.getElementById('success').style.display = 'none'
+    document.getElementById('formContainer').style.display = 'block'
+
+    document.getElementById('emailValidation').innerHTML = ''
+    document.getElementById('priceValidation').innerHTML = ''
+    document.getElementById('quantityValidation').innerHTML = ''
+    document.getElementById('quantityValidation').innerHTML = ''
+    document.getElementById('priceValidation').innerHTML = ''
   })
 
   document.getElementById('closeModal').addEventListener("click", function () {
@@ -72,9 +102,37 @@ if (!document.getElementById('buttonDiv')) {
     var price = document.getElementById('price').value
     var quantity = document.getElementById('quantity').value
     var merchantEmail = document.getElementById('in-context-paypal-metadata').value
+    var end = document.getElementById('end').value
     var productId = JSON.parse(document.getElementById('ProductJson-product').innerHTML).id || ""
     var url = window.location.host
     var name = document.querySelector('meta[property="og:title"]').content;
+
+    var isValid = true
+    // validation
+    if (email == "" || email == null) {
+      document.getElementById('emailValidation').innerHTML = 'Email is required'
+      isValid = false
+    }
+    if (price == "" || price == null) {
+      document.getElementById('priceValidation').innerHTML = 'Price is required'
+      isValid = false
+    }
+    if (quantity == "" || quantity == null) {
+      document.getElementById('quantityValidation').innerHTML = 'Quantity is required'
+      isValid = false
+    }
+    if (quantity < 1) {
+      document.getElementById('quantityValidation').innerHTML = 'Quantity has to be greater than 1'
+      isValid = false
+    }
+    if (price > JSON.parse(document.getElementById('ProductJson-product').innerHTML).price / 100) {
+      document.getElementById('priceValidation').innerHTML = 'Price has to be lower than the current price'
+      isValid = false
+    }
+
+    if (!isValid) {
+      return
+    }
 
     $.post({
       url: 'https://e9a36180.ngrok.io/wishlist/subscribe',
@@ -86,10 +144,13 @@ if (!document.getElementById('buttonDiv')) {
         quantity: quantity,
         domain_name: url,
         price: price,
-        name: name
+        name: name,
+        end: end
       },
       success: function(data) {
-        console.log(data)
+        console.log('updated price')
+        document.getElementById('success').style.display = 'block'
+        document.getElementById('formContainer').style.display = 'none'
       }
     })
 
