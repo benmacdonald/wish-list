@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :allow_iframe_requests
 
   def allow_iframe_requests
-    unless ENV['RAILS_ENV'] == 'production'
+    unless Rails.env == 'production'
       response.headers.delete('X-Frame-Options')
     end
   end
