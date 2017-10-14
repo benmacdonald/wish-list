@@ -5,24 +5,41 @@
     });
   </script>
 <% end %>
-<h2>Products</h2>
 
-<ul>
-  <% @products.each do |product| %>
-    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
-  <% end %>
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.floating-box {
+    float: left;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    ##border: 3px solid #73AD21;
+}
 
-<hr>
+.after-box {
+    clear: left;
+  ##border: 3px solid red;
+}
+</style>
+</head>
+<body>
 
-<h2>Webhooks</h2>
+<h1>Merchant Analytics</h1>
+<p>Products: </p>
 
-<% if @webhooks.present? %>
-  <ul>
-    <% @webhooks.each do |webhook| %>
-      <li><%= webhook.topic %> : <%= webhook.address %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>This app has not created any webhooks for this Shop. Add webhooks to your ShopifyApp initializer if you need webhooks</p>
+<% @products.each do |prod| %>
+  <div class="floating-box">
+  	<img src=<%= prod.images[0].src %> alt="Mountain View" style="width:150px;height:150px;">
+  </div>
+
+  <div class="floating-box">
+      <p><b><%= prod.title %></b></p>
+  		<p>14 people want it at the price of @ 12$ /n</p>
+  		<p>10 people want it at the price of @ 13$ /n</p>
+  </div>
 <% end %>
+
+</body>
+</html>
