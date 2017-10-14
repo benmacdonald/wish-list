@@ -4,7 +4,7 @@ if (!document.getElementById('buttonDiv')) {
 
   var underDiv = document.createElement('div');
   underDiv.setAttribute('id', 'buttonDiv')
-  var inner = "<button id='requestPrice'>Request Price</button>";
+  var inner = "<p>Is this price to high?</p><button id='requestPrice'>Request Lower Price</button>";
   underDiv.innerHTML = inner;
   productForm.parentNode.insertBefore(underDiv, productForm.nextSibling);
 
@@ -29,6 +29,15 @@ if (!document.getElementById('buttonDiv')) {
   document.getElementById('formContainer').innerHTML = form
 
   // Setting the CSS
+
+  productForm.setAttribute('style',
+  "margin-bottom: 18px;"
+  )
+
+  document.getElementById('buttonDiv').setAttribute('style',
+  "text-align:center;"
+  )
+
   modal.setAttribute('style',
   "display :none;" +
   "position: fixed;" +
@@ -63,16 +72,14 @@ if (!document.getElementById('buttonDiv')) {
     var price = document.getElementById('price').value
     var quantity = document.getElementById('quantity').value
     var merchantEmail = document.getElementById('in-context-paypal-metadata').value
-    var productId = JSON.parse(document.getElementById('ProductJson-product').innerHTML).id  || ""
+    var productId = JSON.parse(document.getElementById('ProductJson-product').innerHTML).id || ""
     var url = window.location.host
     var name = document.querySelector('meta[property="og:title"]').content;
-
-    console.log('here')
 
     $.post({
       url: 'https://e9a36180.ngrok.io/wishlist/subscribe',
       method: 'POST',
-      mode: 'no-cors',
+      crossDomain: true,
       data: {
         email: email,
         productid: productId,
@@ -80,6 +87,9 @@ if (!document.getElementById('buttonDiv')) {
         domain_name: url,
         price: price,
         name: name
+      },
+      success: function(data) {
+        console.log(data)
       }
     })
 
