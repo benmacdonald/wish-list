@@ -30,7 +30,7 @@ class WishlistController < ApplicationController
     .where("price >= #{params[:price]} AND end > #{Time.zone.now}")
     print("all wishlists")
     puts WishlistItem.all
-    ApplicationMailer.notify_consumers(wishlists)
+    ApplicationMailer.notify_consumers(wishlists).deliver_now
     redirect_to '/' and return
   end
 
