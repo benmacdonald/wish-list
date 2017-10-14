@@ -27,7 +27,9 @@ class WishlistController < ApplicationController
 
   def notify_consumers
     wishlists = WishlistItem.where(productid: params[:id]).where("price > ?", params[:variants].first[:price].to_i)
-    ApplicationMailer.notify_consumers(wishlists).deliver_now
+    wishlists.each do |wishlist|
+      ApplicationMailer.notify_consumers(wishlist).deliver_now
+    end
     render json: wishlists
   end
 
