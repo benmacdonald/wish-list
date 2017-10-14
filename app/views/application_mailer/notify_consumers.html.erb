@@ -1,2 +1,22 @@
-Hi There the item you wanted is now on listed at $$$$!
-Click here to go to the store and buy it.
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<%= image_tag(attachments['logo.png'].url) %>
+    <p>
+    	Hey <%= @user.email %>, <br><br>
+    		We just wanted to let you know that it seems like the product you wanted from
+        <b><%= @user.vendor %> at the price of <%= @user.price %></b>
+        is now within that price range.
+        Click <a href='<%= @user.domain_name %>'>here</a> to go to the store and
+        complete the purchase.
+    		<br>
+    		<br>
+
+      Cheers,
+    	The Shopify Team
+    </p>
+  </body>
+</html>

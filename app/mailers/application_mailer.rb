@@ -1,10 +1,11 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'decode2017shopify@gmail.com'
   layout 'mailer'
 
   def notify_consumers(users)
     wishlists.each do |user|
-      mail(to: user.email, subject: "The Item you wanted is on sale!")
+      @user = user
+      mail(to: user.email, subject: "The Item you wanted is now on sale!")
     end
   end
 
