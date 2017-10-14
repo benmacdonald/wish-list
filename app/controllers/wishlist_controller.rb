@@ -21,7 +21,7 @@ class WishlistController < ApplicationController
   end
 
   def subscription_params
-  	params.permit(:email, :domain_name, :name, :quantity, :price, :end, :quantity)
+  	params.permit(:email, :domain_name, :name, :quantity, :price, :end, :quantity, :productid)
   end
 
   def notify_consumers

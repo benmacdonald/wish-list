@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<%= image_tag(attachments['logo.png'].url) %>
+    <p>
+    	Hey <%= @shop.shop_owner %>, <br><br>
+    		We just wanted to let you know that it seems like <b><%= @count %></b> of your customers are willing to buy 
+    		<b><%= @product.title %></b> with an average price of <b><%= @average_price %></b>. Click <a href='<%= @shop.domain %>'>here</a> to go to your store and update the price to maximize sales!
+    		<br>
+    		<br>
+
+    	The Shopify Team 
+    </p>
+  </body>
+</html>
