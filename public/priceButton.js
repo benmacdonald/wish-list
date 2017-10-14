@@ -135,7 +135,7 @@ if (!document.getElementById('buttonDiv')) {
     }
 
     $.post({
-      url: 'https://e9a36180.ngrok.io/wishlist/subscribe',
+      url: 'https://wish-listify.herokuapp.com/wishlist/subscribe',
       method: 'POST',
       crossDomain: true,
       data: {

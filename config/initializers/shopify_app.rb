@@ -7,6 +7,6 @@ ShopifyApp.configure do |config|
   config.after_authenticate_job = false
   config.session_repository = Shop
   config.scripttags = [
-    { event:'onload', src: 'https://e9a36180.ngrok.io/priceButton.js'}
+    { event:'onload', src: 'https://wish-listify.herokuapp.com/priceButton.js'}
   ]
 end
